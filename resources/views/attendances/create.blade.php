@@ -1,0 +1,94 @@
+{{-- Wrapper Modal (Ini adalah partial, jadi div pembungkus utamanya ada di index) --}}
+
+
+
+    {{-- Header Modal --}}
+    <div class="flex justify-between items-center border-b p-5">
+        <h3 class="text-xl font-semibold text-gray-800">Catat Absensi Baru</h3>
+        <button @click="createModalOpen = false" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+    </div>
+
+    <form action="{{ route('attendances.store') }}" method="POST">
+        @csrf
+        
+        {{-- Konten Form yang Scrollable --}}
+        <div class="p-5 space-y-6 max-h-[65vh] overflow-y-auto">
+
+            {{-- ====================================================== --}}
+            {{--  INI YANG KURANG: BLOK UNTUK MENAMPILKAN ERROR   --}}
+            {{-- ====================================================== --}}
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Oops! Terjadi kesalahan:</strong>
+                    <ul class="mt-2 list-disc list-inside text-sm">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            {{-- ====================================================== --}}
+
+            @php
+                // Catatan: Query ini sebaiknya ada di Controller, bukan di view.
+                $employees = \App\Models\Employee::orderBy('nama_lengkap')->get();
+            @endphp
+
+            {{-- Baris Pilih Karyawan (Full Width) --}}
+            <div>
+                <label for="karyawan_id" class="block mb-2 text-sm font-medium text-gray-700">Pilih Karyawan</label>
+                <select id="karyawan_id" name="karyawan_id" required 
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3">
+                    <option value="" disabled selected>-- Pilih dari daftar karyawan --</option>
+                    @foreach ($employees as $employee)
+                        <option value="{{ $employee->id }}" {{ old('karyawan_id') == $employee->id ? 'selected' : '' }}>
+                            {{ $employee->nama_lengkap }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- SATU GRID untuk semua elemen 2 kolom agar sejajar --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {{-- Kolom 1, Baris 1 --}}
+                <div>
+                    <label for="tanggal" class="block mb-2 text-sm font-medium text-gray-700">Tanggal</label>
+                    <input type="date" id="tanggal" name="tanggal" value="{{ old('tanggal', date('Y-m-d')) }}" required 
+                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3">
+                </div>
+
+                {{-- Kolom 2, Baris 1 --}}
+                <div>
+                    <label for="waktu_masuk" class="block mb-2 text-sm font-medium text-gray-700">Waktu Masuk</label>
+                    <input type="time" id="waktu_masuk" name="waktu_masuk" value="{{ old('waktu_masuk') }}" required placeholder="--:--"
+                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3">
+                </div>
+
+                {{-- Kolom 1, Baris 2 --}}
+                <div>
+                    <label for="status_absensi" class="block mb-2 text-sm font-medium text-gray-700">Status</label>
+                    <select id="status_absensi" name="status_absensi" 
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3">
+                        <option value="hadir" {{ old('status_absensi', 'hadir') == 'hadir' ? 'selected' : '' }}>Hadir</option>
+                        <option value="izin" {{ old('status_absensi') == 'izin' ? 'selected' : '' }}>Izin</option>
+                        <option value="sakit" {{ old('status_absensi') == 'sakit' ? 'selected' : '' }}>Sakit</option>
+                        <option value="alpha" {{ old('status_absensi') == 'alpha' ? 'selected' : '' }}>Alpha</option>
+                    </select>
+                </div>
+
+                {{-- Kolom 2, Baris 2 --}}
+                <div>
+                    <label for="waktu_keluar" class="block mb-2 text-sm font-medium text-gray-700">Waktu Keluar (Opsional)</label>
+                    <input type="time" id="waktu_keluar" name="waktu_keluar" value="{{ old('waktu_keluar') }}" placeholder="--:--"
+                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3">
+                </div>
+            </div>
+        </div>
+
+        {{-- Footer Modal dengan Tombol Aksi --}}
+        <div class="flex justify-end items-center border-t p-5 space-x-2 bg-gray-50 rounded-b-lg">
+            <button type="button" @click="createModalOpen = false" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg">Batal</button>
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">Simpan</button>
+        </div>
+    </form>
+    

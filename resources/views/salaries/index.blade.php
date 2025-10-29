@@ -60,10 +60,7 @@
         <div class="mt-6">
             {{ $salaries->links() }}
         </div>
-
-        {{-- ====================================================== --}}
-        {{--                KUMPULAN SEMUA MODAL                    --}}
-        {{-- ====================================================== --}}
+        
 
         <div x-show="createModalOpen" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="createModalOpen = false" style="display: none;">
             <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg mx-4" @click.stop>
@@ -71,7 +68,6 @@
             </div>
         </div>
         
-        {{-- Modal Details dan Edit --}}
         @foreach ($salaries as $salary)
             <div x-show="detailsModalId === {{ $salary->id }}" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="detailsModalId = null" style="display: none;">
                 <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg mx-4" @click.stop>

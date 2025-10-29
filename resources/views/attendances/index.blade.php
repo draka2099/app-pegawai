@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Daftar Absensi')
+@section('title', 'Absensi')
 
 @section('content')
 <div x-data="{ 
@@ -63,7 +63,7 @@
                             @endif
                         </td>
                         <td class="px-5 py-4 text-sm text-center align-top">
-                            <button @click="detailsModalId = {{ $attendance->id }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded text-xs">
+                            <button @click="detailsModalId = {{ $attendance->id }}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded text-xs">
                                 Details
                             </button>
                         </td>
@@ -82,9 +82,7 @@
         {{ $attendances->links() }}
     </div>
 
-    {{-- KUMPULAN SEMUA MODAL --}}
     <div x-show="createModalOpen" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="createModalOpen = false" style="display: none;">
-        {{-- PERBAIKAN DI SINI: Tambahkan kembali p-6 --}}
         <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg mx-4" @click.stop>
             @include('attendances.create')
         </div>
@@ -92,14 +90,12 @@
 
     @foreach ($attendances as $attendance)
     <div x-show="detailsModalId === {{ $attendance->id }}" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="detailsModalId = null" style="display: none;">
-        {{-- PERBAIKAN DI SINI: Tambahkan kembali p-6 --}}
         <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg mx-4" @click.stop>
             @include('attendances.show', ['attendance' => $attendance])
         </div>
     </div>
 
     <div x-show="editModalId === {{ $attendance->id }}" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="editModalId = null" style="display: none;">
-        {{-- PERBAIKAN DI SINI: Tambahkan kembali p-6 --}}
         <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg mx-4" @click.stop>
             @include('attendances.edit', ['attendance' => $attendance])
         </div>

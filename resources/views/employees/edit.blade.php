@@ -1,23 +1,17 @@
-{{-- Modal untuk Edit Data Pegawai --}}
+
 <div x-show="editModalId === {{ $employee->id }}" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="editModalId = null" style="display: none;">
     
-    {{-- Card Modal --}}
     <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl mx-4 flex flex-col" @click.stop>
 
-        {{-- Header Modal --}}
         <div class="flex justify-between items-center border-b p-5">
-            <h3 class="text-xl font-semibold text-gray-800">Edit Data Pegawai</h3>
+            <h3 class="text-xl font-semibold text-gray-800">Edit Employees</h3>
             <button @click="editModalId = null" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
         </div>
 
         <form action="{{ route('employees.update', $employee->id) }}" method="POST">
             @csrf
             @method('PUT')
-
-            {{-- Konten Form yang Scrollable --}}
             <div class="p-5 space-y-6 max-h-[65vh] overflow-y-auto">
-                
-                {{-- Baris Nama Lengkap --}}
                 <div>
                     <label for="nama_lengkap_{{ $employee->id }}" class="block mb-2 text-sm font-medium text-gray-700">Nama Lengkap</label>
                     <input type="text" id="nama_lengkap_{{ $employee->id }}" name="nama_lengkap" value="{{ old('nama_lengkap', $employee->nama_lengkap) }}" required
@@ -25,7 +19,6 @@
                            placeholder="e.g., Sayyidhina Raka Maulana">
                 </div>
 
-                {{-- Baris Email dan Nomor Telepon --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="email_{{ $employee->id }}" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
@@ -41,7 +34,6 @@
                     </div>
                 </div>
 
-                {{-- Baris Tanggal Lahir dan Tanggal Masuk --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="tanggal_masuk_{{ $employee->id }}" class="block mb-2 text-sm font-medium text-gray-700">Tanggal Masuk</label>
@@ -50,7 +42,6 @@
                     </div>
                 </div>
 
-                {{-- Baris Alamat --}}
                 <div>
                     <label for="alamat_{{ $employee->id }}" class="block mb-2 text-sm font-medium text-gray-700">Alamat</label>
                     <textarea id="alamat_{{ $employee->id }}" name="alamat" rows="3"
@@ -58,7 +49,6 @@
                               placeholder="e.g., Jl. Teknologi No. 5, Keputih, Surabaya">{{ old('alamat', $employee->alamat) }}</textarea>
                 </div>
                 
-                {{-- Baris Departemen dan Jabatan --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="departemen_id_{{ $employee->id }}" class="block mb-2 text-sm font-medium text-gray-700">Departemen</label>
@@ -84,7 +74,6 @@
                     </div>
                 </div>
 
-                {{-- Baris Status --}}
                 <div>
                     <label for="status_{{ $employee->id }}" class="block mb-2 text-sm font-medium text-gray-700">Status</label>
                     <select id="status_{{ $employee->id }}" name="status"
@@ -95,7 +84,6 @@
                 </div>
             </div>
 
-            {{-- Footer Modal dengan Tombol Aksi --}}
             <div class="flex justify-end items-center border-t p-5 space-x-2">
                 <button type="button" @click="editModalId = null" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg">Batal</button>
                 <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">Update</button>

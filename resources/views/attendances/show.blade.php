@@ -16,12 +16,7 @@
     <div class="grid grid-cols-3 gap-4">
         <span class="font-semibold text-gray-600">Jam Kerja</span>
         <span class="col-span-2">
-            {{-- Format waktu masuk --}}
-            {{ \Carbon\Carbon::parse($attendance->waktu_masuk)->format('H:i') }} -
-
-            {{-- Cek jika ada waktu keluar --}}
             @if($attendance->waktu_keluar)
-            {{ \Carbon\Carbon::parse($attendance->waktu_keluar)->format('H:i') }}
             @else
             <span class="italic text-gray-500">Belum Tercatat</span>
             @endif

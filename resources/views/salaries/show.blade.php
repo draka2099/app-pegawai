@@ -1,5 +1,5 @@
 <div class="flex justify-between items-center border-b pb-3 mb-4">
-    <h3 class="text-xl font-semibold">Rincian Gaji Karyawan</h3>
+    <h3 class="text-xl font-semibold">Salaries Details</h3>
     <button @click="detailsModalId = null" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
 </div>
 <div>

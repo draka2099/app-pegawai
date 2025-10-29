@@ -37,7 +37,7 @@
                                 <td class="px-5 py-4 text-sm align-top font-semibold">{{ $department->nama_departemen }}</td>
                                 <td class="px-5 py-4 text-sm align-top">{{ Str::limit($department->deskripsi, 70) }}</td>
                                 <td class="px-5 py-4 text-sm text-center align-top">
-                                    <button @click="detailsModalId = {{ $department->id }}" class=>
+                                    <button @click="detailsModalId = {{ $department->id }}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded text-xs">
                                         Details
                                     </button>
                                 </td>
@@ -56,18 +56,12 @@
             {{ $departments->links() }}
         </div>
 
-        {{-- ====================================================== --}}
-        {{--                KUMPULAN SEMUA MODAL                    --}}
-        {{-- ====================================================== --}}
-
         <div x-show="createModalOpen" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="createModalOpen = false" style="display: none;">
             <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg mx-4" @click.stop>
-                {{-- Kita akan include form dari create.blade.php --}}
                 @include('departments.create')
             </div>
         </div>
-        
-        {{-- Modal Details dan Edit --}}
+
         @foreach ($departments as $department)
             <div x-show="detailsModalId === {{ $department->id }}" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="detailsModalId = null" style="display: none;">
                 <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg mx-4" @click.stop>

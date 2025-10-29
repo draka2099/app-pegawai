@@ -1,7 +1,7 @@
 <div x-show="detailsModalId === {{ $employee->id }}" x-transition class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50" @click.away="detailsModalId = null" style="display: none;">
     <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg mx-4" @click.stop>
         <div class="flex justify-between items-center border-b pb-3 mb-4">
-            <h3 class="text-xl font-semibold">Detail Pegawai</h3>
+            <h3 class="text-xl font-semibold">Detail Employees</h3>
             <button @click="detailsModalId = null" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
         </div>
         <div class="space-y-4 text-sm">

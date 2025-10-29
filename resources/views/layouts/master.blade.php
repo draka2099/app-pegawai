@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'App Pegawai')</title>
+    <title>@yield('title', 'Campus University')</title>
     @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
@@ -12,7 +12,7 @@
     <div class="container mx-auto px-6 py-3">
         <div class="flex items-center justify-between">
             <div>
-                <a class="text-white text-2xl font-bold" href="{{ url('/') }}">App Pegawai</a>
+                <a class="text-white text-2xl font-bold" href="{{ url('/') }}">Campus University</a>
             </div>
             
             <div class="hidden md:flex items-center space-x-4">
@@ -48,7 +48,7 @@
     @yield('content')
 </main>
 <footer class="text-center py-6 text-gray-500 text-sm">
-    &copy; {{ date('Y') }} App Pegawai
+    &copy; {{ date('Y') }} campus university
 </footer>
 </body>
 </html>

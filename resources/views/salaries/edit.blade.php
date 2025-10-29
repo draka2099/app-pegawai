@@ -1,11 +1,6 @@
-{{-- Wrapper Modal --}}
-{{-- <div x-show="editModalId === {{ $salary->id }}" x-transition ... > --}}
 
-
-
-        {{-- Header Modal --}}
         <div class="flex justify-between items-center border-b p-5">
-            <h3 class="text-xl font-semibold text-gray-800">Edit Data Gaji</h3>
+            <h3 class="text-xl font-semibold text-gray-800">Edit Salaries</h3>
             <button @click="editModalId = null" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
         </div>
 
@@ -16,11 +11,9 @@
             {{-- Konten Form yang Scrollable --}}
             <div class="p-5 space-y-6 max-h-[65vh] overflow-y-auto">
                 @php
-                    // Catatan: Query ini sebaiknya ada di Controller, bukan di view.
                     $employees = \App\Models\Employee::orderBy('nama_lengkap')->get();
                 @endphp
 
-                {{-- Baris Pilih Karyawan --}}
                 <div>
                     <label for="karyawan_id_{{ $salary->id }}" class="block mb-2 text-sm font-medium text-gray-700">Pilih Karyawan</label>
                     <select id="karyawan_id_{{ $salary->id }}" name="karyawan_id" required 
@@ -32,15 +25,12 @@
                         @endforeach
                     </select>
                 </div>
-
-                {{-- Baris Periode Gaji --}}
                 <div>
                     <label for="bulan_{{ $salary->id }}" class="block mb-2 text-sm font-medium text-gray-700">Periode Gaji (Bulan & Tahun)</label>
                     <input type="month" id="bulan_{{ $salary->id }}" name="bulan" value="{{ old('bulan', $salary->bulan) }}" required 
                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3">
                 </div>
 
-                {{-- Grid untuk Komponen Gaji --}}
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label for="gaji_pokok_{{ $salary->id }}" class="block mb-2 text-sm font-medium text-gray-700">Gaji Pokok</label>
@@ -60,12 +50,9 @@
                 </div>
             </div>
 
-            {{-- Footer Modal dengan Tombol Aksi --}}
             <div class="flex justify-end items-center border-t p-5 space-x-2 bg-gray-50 rounded-b-lg">
                 <button type="button" @click="editModalId = null" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg">Batal</button>
                 <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">Update</button>
             </div>
         </form>
     
-
-{{-- </div> --}}

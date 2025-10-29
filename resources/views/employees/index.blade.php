@@ -1,8 +1,7 @@
 @extends('layouts.master')
-@section('title', 'Daftar Pegawai')
+@section('title', 'Campus University')
 
 @section('content')
-    {{-- Inisialisasi state Alpine.js untuk semua modal --}}
     <div x-data="{ createModalOpen: false, detailsModalId: null, editModalId: null }">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-700">List of Employees</h1>
@@ -15,7 +14,6 @@
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full leading-normal">
-                    {{-- STRUKTUR TABEL (thead) TIDAK DIUBAH SESUAI PERMINTAAN --}}
                     <thead>
                         <tr class="bg-gray-800 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
                             <th class="px-5 py-3">No</th>
@@ -65,11 +63,8 @@
         <div class="mt-6">
             {{ $employees->links() }}
         </div>
-
-        {{-- Memanggil snippet/partial untuk modal 'create' --}}
         @include('employees.create')
 
-        {{-- Memanggil snippet/partial untuk modal 'show' & 'edit' untuk setiap data --}}
         @foreach ($employees as $employee)
             @include('employees.show', ['employee' => $employee])
             @include('employees.edit', ['employee' => $employee, 'departments' => $departments, 'positions' => $positions])
